@@ -1,0 +1,31 @@
+{{!< webpanel}}
+ <header class="aui-page-header">
+     <div class="aui-page-header-inner">
+         <div class="aui-page-header-main intro-header">
+             <h1>{{title}}</h1>
+         </div>
+     </div>
+ </header>
+
+ <div class="aui-page-panel main-panel">
+     <div class="aui-page-panel-inner">
+        <form class="aui top-labels" action="/save-config">
+            <input type="hidden" name="jwt" value="{{token}}">
+            <div class="field-group">
+                <label for="tenant-url">Tenant URL<span class="aui-icon icon-required">(required)</span></label>
+                <input class="text long-field" type="text" id="tenant-url" name="tenant-url" placeholder="https://[tenant id].live.dynatrace.com" value="{{tenant}}" required>
+            </div>
+            <div class="field-group">
+                <label for="tenant-token">API Token<span class="aui-icon icon-required">(required)</span></label>
+                <input class="text long-field" type="text" id="tenant-token" name="tenant-token" placeholder="Token Here" value="{{dtoken}}" required>
+                <div class="description">Get this from your Dynatrace tenant integration settings</div>
+            </div>
+            <div class="buttons-container">
+                <div class="buttons">
+                    <button class="aui-button aui-button-primary" id="tenant-save-button">Save</button>
+                    <a class="cancel aui-button-cancel" href="/delete-config?jwt={{token}}">Clear</a>
+                </div>
+            </div>
+        </form>
+     </div>
+ </div>

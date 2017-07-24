@@ -1,0 +1,90 @@
+{
+    "key": "dynatrace-jira-2way",
+    "name": "Dynatrace",
+    "description": "Display information from Dynatrace in JIRA tickets",
+    "vendor": {
+        "name": "Dynatrace",
+        "url": "https://dynatrace.com"
+    },
+    "baseUrl": "https://dyla-jira.ngrok.io",
+    "links": {
+        "self": "https://dyla-jira.ngrok.io/atlassian-connect.json",
+        "homepage": "https://dyla-jira.ngrok.io/atlassian-connect.json"
+    },
+    "authentication": {
+        "type": "jwt"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "scopes": [
+        "READ", "ADMIN"
+    ],
+    "modules": {
+        "jiraIssueFields": [
+            {
+              "description": {
+                  "value": "Dynatrace Problem ID"
+              },
+              "type": "text",
+              "name": {
+                  "value": "PID"
+              },
+              "key": "dynatrace-problem"
+            }
+        ],
+        "configurePage": {
+          "url": "/config",
+          "name": {
+            "value": "Configuration"
+          },
+          "key": "dynatrace-config-page"
+        },
+        // "webhooks": [
+        //   {
+        //     "event": "jira:issue_updated",
+        //     "url": "/issue-updated"
+        //   }
+        // ],
+        "webPanels": [
+          {
+            "key": "dynatrace-example-right-panel",
+            "location": "atl.jira.view.issue.right.context",
+            "conditions": [
+              {
+                "and": [
+                  {
+                    "condition": "entity_property_exists",
+                    "params": {
+                      "entity": "addon",
+                      "propertyKey": "tenant"
+                    }
+                  },
+                  {
+                    "condition": "entity_property_exists",
+                    "params": {
+                      "entity": "issue",
+                      "propertyKey": "dynatraceProblemId"
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": {
+              "value": "Dynatrace Issue"
+            },
+            "url": "/activity?project={project.id}&issue={issue.key}"
+          }
+        ],
+        "webItems": [
+          {
+            "key": "dynatrace-button",
+            "location": "jira.issue.tools",
+            "name": {
+              "value": "Dynatrace"
+            },
+            "url": "https://dynatrace.com"
+          }
+        ]
+    }
+}
