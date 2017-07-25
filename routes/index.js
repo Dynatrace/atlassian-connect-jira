@@ -37,7 +37,7 @@ module.exports = function (app, addon) {
       var httpClient = addon.httpClient(req);
     });
 
-    app.get("/activity", addon.authenticate(), function(req, res) {
+    app.get("/issue-right", addon.authenticate(), function(req, res) {
       var endpoint = `/rest/api/latest/issue/${req.query.issue}`;
       var httpClient = addon.httpClient(req);
 

@@ -17,22 +17,8 @@
     "lifecycle": {
         "installed": "/installed"
     },
-    "scopes": [
-        "READ", "ADMIN"
-    ],
+    "scopes": [ "READ" ],
     "modules": {
-        "jiraIssueFields": [
-            {
-              "description": {
-                  "value": "Dynatrace Problem ID"
-              },
-              "type": "text",
-              "name": {
-                  "value": "PID"
-              },
-              "key": "dynatrace-problem"
-            }
-        ],
         "configurePage": {
           "url": "/config",
           "name": {
@@ -48,7 +34,7 @@
         // ],
         "webPanels": [
           {
-            "key": "dynatrace-example-right-panel",
+            "key": "dynatrace-right-panel",
             "location": "atl.jira.view.issue.right.context",
             "conditions": [
               {
@@ -71,19 +57,9 @@
               }
             ],
             "name": {
-              "value": "Dynatrace Issue"
+              "value": "Dynatrace Problem"
             },
-            "url": "/activity?project={project.id}&issue={issue.key}"
-          }
-        ],
-        "webItems": [
-          {
-            "key": "dynatrace-button",
-            "location": "jira.issue.tools",
-            "name": {
-              "value": "Dynatrace"
-            },
-            "url": "https://dynatrace.com"
+            "url": "/issue-right?project={project.id}&issue={issue.key}"
           }
         ]
     }
