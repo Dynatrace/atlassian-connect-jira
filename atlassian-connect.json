@@ -1,15 +1,15 @@
 {
-    "key": "dynatrace-jira-2way",
-    "name": "Dynatrace",
+    "key": "dynatrace-andi-jira-2way",
+    "name": "Dynatrace (Andi)",
     "description": "Display information from Dynatrace in JIRA tickets",
     "vendor": {
         "name": "Dynatrace",
         "url": "https://dynatrace.com"
     },
-    "baseUrl": "https://dyla-jira.ngrok.io",
+    "baseUrl": "https://fccf5896.ngrok.io",
     "links": {
-        "self": "https://dyla-jira.ngrok.io/atlassian-connect.json",
-        "homepage": "https://dyla-jira.ngrok.io/atlassian-connect.json"
+        "self": "https://fccf5896.ngrok.io/atlassian-connect.json",
+        "homepage": "https://fccf5896.ngrok.io/atlassian-connect.json"
     },
     "authentication": {
         "type": "jwt"
