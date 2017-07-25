@@ -77,8 +77,8 @@ module.exports = function (app, addon) {
         }, (err, dres, body) => {
           const problem = body.result;
           problem.hasRootCause = problem.rankedEvents.filter(e => e.isRootCause).length > 0;
-          console.log(problem);
-          res.render("issue", { problem });
+          console.log(JSON.stringify(problem, null, 2));
+          res.render("issue", { problem, tenant: tenant.tenant });
         });
       });
     });
