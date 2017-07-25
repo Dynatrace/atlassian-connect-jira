@@ -1,10 +1,11 @@
 "use strict";
 
 const request = require("request");
+const key = require("./atlassian-connect").key;
 
 function getTenant(req, httpClient, cb) {
   httpClient.get({
-    uri: "/rest/atlassian-connect/1/addons/dynatrace-jira-2way/properties/tenant",
+    uri: `/rest/atlassian-connect/1/addons/${key}/properties/tenant`,
     json: true,
   }, (err, ires, body) => {
     if (err) { return cb(err); }

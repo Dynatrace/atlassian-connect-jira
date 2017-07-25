@@ -26,12 +26,12 @@
           },
           "key": "dynatrace-config-page"
         },
-        // "webhooks": [
-        //   {
-        //     "event": "jira:issue_updated",
-        //     "url": "/issue-updated"
-        //   }
-        // ],
+        "webhooks": [
+          {
+            "event": "jira:issue_updated",
+            "url": "/issue-updated"
+          }
+        ],
         "webPanels": [
           {
             "key": "dynatrace-right-panel",
