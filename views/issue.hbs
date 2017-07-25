@@ -1,6 +1,24 @@
 {{!< webpanel}}
-<a href="{{tenant}}/#problems/problemdetails;pid={{problem.id}}">Problem {{problem.displayName}}</a><br>
-Status: {{problem.status}}<br>
-Severity Level: {{problem.severityLevel}}<br>
-Impact Level: {{problem.impactLevel}}<br>
-Root Cause Detected: {{problem.hasRootCause}}
+<b><a href="{{tenant}}/#problems/problemdetails;pid={{problem.id}}">{{problem.displayName}}: {{problem.title}}</a><br></b>
+<div class="pills">
+    <span class="aui-lozenge aui-lozenge-{{#if problem.closed}}success{{else}}error{{/if}}">{{problem.status}}</span>
+    {{#if problem.hasRootCause}}
+    <span class="aui-lozenge aui-lozenge-current">Root Cause Detected</span>
+    {{/if}}
+</div>
+<div class="eventsOnComponents">
+    <h6>{{problem.rankedEvents.length}} events on {{problem.numEntitiesAffected}} components</h6>
+</div>
+<strong>Severity</strong>
+{{problem.severityLevelName}}<br>
+<strong>Impact</strong>
+{{problem.impactLevelName}}<br>
+
+<div class="tags">
+    {{#each problem.topTags}}
+        <span class="aui-label">{{this.key}}</span>
+    {{/each}}
+    {{#if problem.manyTags}}
+    ...
+    {{/if}}
+</div>

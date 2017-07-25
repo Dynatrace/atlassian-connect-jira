@@ -6,19 +6,19 @@
   <meta name="ap-local-base-url" content="{{localBaseUrl}}">
   <title>{{title}}</title>
   <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.8.12/css/aui.css" media="all">
-  <!-- <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.8.12/css/aui-experimental.css" media="all"> -->
+  <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.8.12/css/aui-experimental.css" media="all">
   <!--[if IE 9]><link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.8.12/css/aui-ie9.css" media="all"><![endif]-->
   <link rel="stylesheet" href="{{furl '/css/addon.css'}}" type="text/css" />
   <script src="//aui-cdn.atlassian.com/aui-adg/5.8.12/js/aui.js" type="text/javascript"></script>
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="//aui-cdn.atlassian.com/aui-adg/5.8.12/js/aui-soy.js" type="text/javascript"></script>
-  <script src="//aui-cdn.atlassian.com/aui-adg/5.8.12/js/aui-datepicker.js"></script>
-  <script src="//aui-cdn.atlassian.com/aui-adg/5.8.12/js/aui-experimental.js"></script> -->
+  <script src="//aui-cdn.atlassian.com/aui-adg/5.8.12/js/aui-experimental.js" type="text/javascript"></script>
   <script src="{{hostScriptUrl}}" type="text/javascript"></script>
 </head>
 <body>
-  <section id="content" role="main">
-    {{{body}}}
-  </section>
+    <div class="ac-content">
+        {{{body}}}
+    </div>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="{{furl '/js/jira-activity.js'}}"></script>
+  <script src="{{furl '/js/addon.js'}}"></script>
 </body>
 </html>

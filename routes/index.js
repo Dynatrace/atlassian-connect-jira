@@ -1,5 +1,7 @@
 const request = require("request");
+const language = require("./../resources/language");
 const async = require("async");
+const _ = require("lodash");
 
 module.exports = function (app, addon) {
 
@@ -75,8 +77,25 @@ module.exports = function (app, addon) {
           },
           json: true,
         }, (err, dres, body) => {
+          if (err) {
+            console.log(err);
+            res.render("error");
+          }
+
           const problem = body.result;
           problem.hasRootCause = problem.rankedEvents.filter(e => e.isRootCause).length > 0;
+          const last = problem.rankedEvents[problem.rankedEvents.length - 1];
+          const eventName = language.eventType[last.eventType] || last.eventType;
+
+          problem.title = `${eventName} on ${last.entityName}`;
+          problem.closed = problem.status === "CLOSED";
+          problem.severityLevelName = language.severityLevel[problem.severityLevel] || problem.severityLevel;
+          problem.impactLevelName = language.impactLevel[problem.impactLevel] || problem.impactLevel;
+          problem.numEntitiesAffected = _.uniq(problem.rankedEvents.map(e => e.entityId)).length;
+
+          problem.tagsOfAffectedEntities = problem.tagsOfAffectedEntities || [];
+          problem.manyTags = [problem.tagsOfAffectedEntities.length] > 10;
+          problem.topTags = problem.tagsOfAffectedEntities.slice(0, 10);
           console.log(JSON.stringify(problem, null, 2));
           res.render("issue", { problem, tenant: tenant.tenant });
         });
