@@ -169,8 +169,6 @@
 
         "PGI_MEMDUMP" : "Process Memory Ddump",
  
-
-        // EXTERNAL
         "CPU_SATURATED"  : "CPU Saturated",
         "LOW_DISK_SPACE" : "Low Disk Space",
         "SLOW_DISK"      : "Slow Disk",
