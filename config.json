@@ -2,6 +2,7 @@
     // This is the default environment. To change your app to use
     // a different env, set NODE_ENV (http://expressjs.com/api.html#app.configure)
     "development": {
+        "localBaseUrl": "https://dyla-jira.ngrok.io",
         // This is the port your Express server will listen on
         "port": 3000,
         //Use 'unauthorized.hbs' template for displaying an error page
