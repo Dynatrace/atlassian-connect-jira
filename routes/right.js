@@ -2,48 +2,22 @@ const request = require("request");
 const language = require("./../resources/language");
 const async = require("async");
 const _ = require("lodash");
+const util = require("../util");
 
 module.exports = function (app, addon) {
     app.get("/issue-right", addon.authenticate(), function(req, res) {
-      var endpoint = `/rest/api/latest/issue/${req.query.issue}`;
-      var httpClient = addon.httpClient(req);
+      const httpClient = addon.httpClient(req);
 
       async.parallel([
-          (cb) => {
-            httpClient.get({
-              uri: `/rest/api/2/issue/${req.query.issue}/properties/dynatraceProblemId`,
-            }, (err, ires, body) => {
-              if (err) {
-                cb(err);
-              } else {
-                cb(null, JSON.parse(body).value);
-              }
-            });
-          },
-          (cb) => {
-            httpClient.get({
-              uri: "/rest/atlassian-connect/1/addons/dynatrace-jira-2way/properties/tenant",
-            }, (err, ires, body) => {
-              if (err) {
-                cb(err);
-              } else {
-                cb(null, JSON.parse(body).value);
-              }
-            });
-          }
+          (cb) => util.getPid(req, httpClient, cb),
+          (cb) => util.getTenant(req, httpClient, cb),
       ], (e, results) => {
         const pid = results[0];
         const tenant = results[1];
         const tenantUrl = tenant.tenant;
         const tenantToken = tenant.token;
 
-        request.get({
-          uri: `${tenantUrl}/api/v1/problem/details/${pid}`,
-          headers: {
-            Authorization: `Api-Token ${tenantToken}`,
-          },
-          json: true,
-        }, (err, dres, body) => {
+        util.getProblemDetails(tenantUrl, tenantToken, pid, (err, dres, body) => {
           if (err) {
             console.log(err);
             res.render("error");
