@@ -1,0 +1,36 @@
+{
+    "impactLevel" : {
+        "APPLICATION" : "Application",
+        "INFRASTRUCTURE" : "Infrastructure",
+        "SERVICE" : "Service"
+    },
+    "severityLevel" : {
+        "RESOURCE_CONTENTION" : "Resource Contention",
+        "AVAILABILITY" : "Availability",
+        "PERFORMANCE" : "Performance",
+        "ERROR" : "Error"
+    },
+    "eventType" : {
+        "CPU_SATURATED"  : "CPU Saturated",
+        "LOW_DISK_SPACE" : "Low Disk Space",
+        "SLOW_DISK"      : "Slow Disk",
+        "HIGH_CONNECTIVITY_FAILURES" : "High Connectivity Failures",
+        "PGI_OF_SERVICE_UNAVAILABLE" : "Service Process Unavailable",
+        "PROCESS_GROUP_LOW_INSTANCE_COUNT" : "Low Service Process Count",
+        "FAILURE_RATE_INCREASED" : "Failure Rate Increased",
+        "SERVICE_RESPONSE_TIME_DEGRADED" : "Service Response Degraded",
+        "USER_ACTION_DURATION_DEGRADATION" : "User Action Duration Degraded",
+        "HIGH_NETWORK_LOSS_RATE" : "High Network Loss Rate",
+        "SYNTHETIC_SLOWDOWN" : "Synthetic Slowdown",
+        "WEB_CHECK_LOCAL_OUTAGE" : "Web Check Local Outage",
+        "WEB_CHECK_GLOBAL_OUTAGE" : "Web Check Global Outage",
+        "PROCESS_LOG_ERROR" : "Log Error",
+        "JAVASCRIPT_ERROR_RATE_INCREASED" : "JavaScript Error Increase",
+        "OPENSTACK_KEYSTONE_UNHEALTHY" : "OpenStack Keystone Unhealthy",
+        "MOBILE_APP_CRASH_RATE_INCREASED" : "Mobile AppCrash Rate Increased"
+    },
+    "status" : {
+        "OPEN": "Open",
+        "CLOSE" : "Close"
+    }
+}
