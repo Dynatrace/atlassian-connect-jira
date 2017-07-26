@@ -1,7 +1,9 @@
 "use strict";
 
 const request = require("request");
+const async = require("async");
 const key = require("./atlassian-connect").key;
+const escape = require("escape-html");
 
 function getTenant(req, httpClient, cb) {
   httpClient.get({
@@ -39,6 +41,52 @@ function getProblemDetails(tenant, token, pid, cb) {
   }, cb);
 }
 
+function getProblemComments(tenant, token, pid, cb) {
+  request.get({
+    uri: `${tenant}/api/v1/problem/details/${pid}/comments`,
+    headers: {
+      Authorization: `Api-Token ${token}`,
+    },
+    json: true,
+  }, cb);
+}
+
+function getProblemDetailsWithComments(tenant, token, pid, cb) {
+  async.parallel([
+      acb => getProblemDetails(tenant, token, pid, acb),
+      acb => getProblemComments(tenant, token, pid, acb),
+  ], (e, results) => {
+    if (e) { return cb(e); }
+
+    if (!results[0][1] || !results[1][1]) {
+      return cb();
+    }
+
+    if (results[0][0].statusCode !== 200) {
+      console.log("Could not find problem");
+      return cb();
+    }
+
+    const problem = results[0][1].result;
+
+    if (results[1][0].statusCode !== 200) {
+      console.log("Could not find comments");
+      problem.comments = [];
+      return cb(null, problem);
+    }
+
+    const comments = results[1][1].comments.map(c => {
+      c.isComment = true;
+      c.startTime = c.createdAtTimestamp;
+      c.content = escape(c.content);
+      c.content = c.content.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      return c;
+    });;
+    problem.comments = comments;
+    cb(null, problem);
+  });
+}
+
 const modifiers = {
   SYNTHETIC: "#monitors/webcheckdetail;webcheckId",
   HOST: "#hostdetails;id",
@@ -70,5 +118,6 @@ module.exports = {
   getTenant,
   getPid,
   getProblemDetails,
+  getProblemDetailsWithComments,
 };
 

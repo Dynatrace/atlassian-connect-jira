@@ -18,23 +18,18 @@ module.exports = function (app, addon) {
         const tenantUrl = tenant.tenant;
         const tenantToken = tenant.token;
 
-        util.getProblemDetails(tenantUrl, tenantToken, pid, (err, dres, body) => {
+        util.getProblemDetailsWithComments(tenantUrl, tenantToken, pid, (err, problem) => {
           if (err) {
             console.error(err);
             res.render("error");
           }
 
-          if (!body.result) {
+          if (!problem) {
             console.error(dres);
-          }
-
-          if (dres.statusCode !== 200) {
             res.render("error", { message: "There was an error communicating with Dynatrace" });
-            return;
           }
-          const problem = body.result;
 
-          const events = _.sortBy(problem.rankedEvents, e => -e.startTime).map(impact => {
+          const processedEvents = problem.rankedEvents.map(impact => {
             impact.closed = impact.status === "CLOSED";
             impact.eventName = language.eventType[impact.eventType];
             impact.renderedTime = moment.tz(impact.startTime, req.query.tz).calendar();
@@ -44,6 +39,13 @@ module.exports = function (app, addon) {
             impact.link = util.eventLink(tenantUrl, impact, pid);
             return impact;
           });
+
+          problem.comments = problem.comments.map(c => {
+            c.renderedTime = moment.tz(c.startTime, req.query.tz).calendar();
+            return c;
+          });
+
+          const events = _.sortBy(processedEvents.concat(problem.comments), e => -e.startTime);
 
           res.render("event-feed", { events });
         });
