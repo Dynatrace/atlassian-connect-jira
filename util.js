@@ -47,9 +47,34 @@ function addProblemComment(tenant, token, pid, comment, user, context, cb) {
     },
     json: `{"comment": "${comment}", "user" : "${user}", "context" : "${context}"}`,
   }, cb);  
+const modifiers = {
+  SYNTHETIC: "#monitors/webcheckdetail;webcheckId",
+  HOST: "#hostdetails;id",
+  APPLICATION: "#uemappmetrics;uemapplicationId",
+  MOBILE_APPLICATION: "#mobileappoverview;appId",
+  SERVICE: "#services/servicedetails;id",
+  PROCESS: "#processdetails;id",
+  PROCESS_GROUP_INSTANCE: "#processdetails;id",
+  PROCESS_GROUP: "#processgroupdetails;id",
+  HYPERVISOR: "#hypervisordetails;id",
+  SYNTHETIC_TEST: "#webcheckdetailV3;webcheckId",
+  DCRUM_APPLICATION: "#entity;id",
+};
+
+function eventLink(tenant, event, pid) {
+  const entityType = event.entityId.split("-")[0];
+  const modifier = modifiers[entityType];
+
+  if (!modifier) {
+    console.log(entityType);
+    return `${tenant}/#problems/problemdetails;pid=${pid}`;
+  }
+
+  return `${tenant}/${modifier}=${event.entityId};gtf=p_${pid};pid=${pid}`;
 }
 
 module.exports = {
+  eventLink,
   getTenant,
   getPid,
   getProblemDetails,
