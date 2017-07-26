@@ -16,6 +16,8 @@
     "express-hbs": "*",
     "jugglingdb-sqlite3": "0.0.5",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "morgan": "^1.6.1",
     "request": "^2.81.0",
     "static-expiry": ">=0.0.5"

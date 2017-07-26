@@ -26,6 +26,15 @@
           },
           "key": "dynatrace-config-page"
         },
+        "jiraIssueTabPanels": [
+          {
+            "url": "/event-feed?issue={issue.key}",
+            "name": {
+              "value": "Dynatrace Events"
+            },
+            "key": "event-list"
+          }
+        ],
         "webhooks": [
           {
             "event": "jira:issue_updated",

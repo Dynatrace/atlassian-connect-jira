@@ -19,8 +19,17 @@ module.exports = function (app, addon) {
 
         util.getProblemDetails(tenantUrl, tenantToken, pid, (err, dres, body) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             res.render("error");
+          }
+
+          if (!body.result) {
+            console.error(dres);
+          }
+
+          if (dres.statusCode !== 200) {
+            res.render("error", { message: "There was an error communicating with Dynatrace" });
+            return;
           }
 
           const problem = body.result;
@@ -37,7 +46,6 @@ module.exports = function (app, addon) {
           problem.tagsOfAffectedEntities = problem.tagsOfAffectedEntities || [];
           problem.manyTags = [problem.tagsOfAffectedEntities.length] > 10;
           problem.topTags = problem.tagsOfAffectedEntities.slice(0, 10);
-          console.log(JSON.stringify(problem, null, 2));
           res.render("issue", { problem, tenant: tenant.tenant });
         });
       });
