@@ -3,8 +3,8 @@
 const request = require("request");
 const async = require("async");
 const key = require("./atlassian-connect").key;
-<<<<<<< HEAD
 const url = require("url");
+const escape = require("escape-html");
 
 // Returns the full link to the JIRA Ticket that is referenced in the request object
 function getJiraTicketLink(req, ticketId) {
@@ -22,9 +22,6 @@ function getJiraTicketLink(req, ticketId) {
   var parsedUrl = url.parse(baseJiraURL);
   return `${parsedUrl.protocol}//${parsedUrl.host}/browse/${ticketId}`;
 }
-=======
-const escape = require("escape-html");
->>>>>>> master
 
 function getTenant(req, httpClient, cb) {
   httpClient.get({
