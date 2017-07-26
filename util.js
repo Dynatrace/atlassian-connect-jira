@@ -39,9 +39,20 @@ function getProblemDetails(tenant, token, pid, cb) {
   }, cb);
 }
 
+function addProblemComment(tenant, token, pid, comment, user, context, cb) {
+  request.post({
+    uri: `${tenant}/api/v1/problem/details/${pid}/comments`,
+    headers: {
+      Authorization: `Api-Token ${token}`,
+    },
+    json: `{"comment": "${comment}", "user" : "${user}", "context" : "${context}"}`,
+  }, cb);  
+}
+
 module.exports = {
   getTenant,
   getPid,
   getProblemDetails,
+  addProblemComment,
 };
 

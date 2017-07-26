@@ -37,7 +37,7 @@ module.exports = function (app, addon) {
           problem.tagsOfAffectedEntities = problem.tagsOfAffectedEntities || [];
           problem.manyTags = [problem.tagsOfAffectedEntities.length] > 10;
           problem.topTags = problem.tagsOfAffectedEntities.slice(0, 10);
-          console.log(JSON.stringify(problem, null, 2));
+          // console.log(JSON.stringify(problem, null, 2));
           res.render("issue", { problem, tenant: tenant.tenant });
         });
       });

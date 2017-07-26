@@ -28,8 +28,8 @@
         },
         "webhooks": [
           {
-            "event": "jira:issue_updated",
-            "url": "/issue-updated"
+            "event": "comment_created",
+            "url": "/comment-created?issue={issue.key}"
           }
         ],
         "webPanels": [
