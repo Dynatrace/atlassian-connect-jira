@@ -47,6 +47,8 @@ function addProblemComment(tenant, token, pid, comment, user, context, cb) {
     },
     json: `{"comment": "${comment}", "user" : "${user}", "context" : "${context}"}`,
   }, cb);  
+}
+
 const modifiers = {
   SYNTHETIC: "#monitors/webcheckdetail;webcheckId",
   HOST: "#hostdetails;id",
@@ -79,5 +81,4 @@ module.exports = {
   getPid,
   getProblemDetails,
   addProblemComment,
-};
-
+}
