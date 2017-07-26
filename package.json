@@ -12,6 +12,7 @@
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",
     "errorhandler": "^1.4.2",
+    "escape-html": "^1.0.3",
     "express": "^4.13.3",
     "express-hbs": "*",
     "jugglingdb-sqlite3": "0.0.5",

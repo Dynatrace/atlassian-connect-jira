@@ -1,7 +1,9 @@
 "use strict";
 
 const request = require("request");
+const async = require("async");
 const key = require("./atlassian-connect").key;
+<<<<<<< HEAD
 const url = require("url");
 
 // Returns the full link to the JIRA Ticket that is referenced in the request object
@@ -20,6 +22,9 @@ function getJiraTicketLink(req, ticketId) {
   var parsedUrl = url.parse(baseJiraURL);
   return `${parsedUrl.protocol}//${parsedUrl.host}/browse/${ticketId}`;
 }
+=======
+const escape = require("escape-html");
+>>>>>>> master
 
 function getTenant(req, httpClient, cb) {
   httpClient.get({
@@ -57,6 +62,17 @@ function getProblemDetails(tenant, token, pid, cb) {
   }, cb);
 }
 
+/**
+ * Adds a comment to the Dynatrace Problem
+ * @param {string} tenant Dynatrace Tenant URL
+ * @param {string} token Dynatrace API Token
+ * @param {string} pid 
+ * @param {string} comment 
+ * @param {string} user 
+ * @param {string} context 
+ * @param {string} jiraTicketLink 
+ * @param {function} cb 
+ */
 function addProblemComment(tenant, token, pid, comment, user, context, jiraTicketLink, cb) {
   // Lets build the comment string to first contain a link back to the JIRA Ticket
   comment = `Comment sync on [JIRA - ${context}](${jiraTicketLink})\n----------------------------------------\n${comment}`;
@@ -74,7 +90,53 @@ function addProblemComment(tenant, token, pid, comment, user, context, jiraTicke
     },
     body: dtComment,
     json: true,
-  }, cb);  
+  }, cb);
+}
+
+function getProblemComments(tenant, token, pid, cb) {
+  request.get({
+    uri: `${tenant}/api/v1/problem/details/${pid}/comments`,
+    headers: {
+      Authorization: `Api-Token ${token}`,
+    },
+    json: true,
+  }, cb);
+}
+
+function getProblemDetailsWithComments(tenant, token, pid, cb) {
+  async.parallel([
+      acb => getProblemDetails(tenant, token, pid, acb),
+      acb => getProblemComments(tenant, token, pid, acb),
+  ], (e, results) => {
+    if (e) { return cb(e); }
+
+    if (!results[0][1] || !results[1][1]) {
+      return cb();
+    }
+
+    if (results[0][0].statusCode !== 200) {
+      console.log("Could not find problem");
+      return cb();
+    }
+
+    const problem = results[0][1].result;
+
+    if (results[1][0].statusCode !== 200) {
+      console.log("Could not find comments");
+      problem.comments = [];
+      return cb(null, problem);
+    }
+
+    const comments = results[1][1].comments.map(c => {
+      c.isComment = true;
+      c.startTime = c.createdAtTimestamp;
+      c.content = escape(c.content);
+      c.content = c.content.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      return c;
+    });;
+    problem.comments = comments;
+    cb(null, problem);
+  });
 }
 
 const modifiers = {
@@ -108,6 +170,12 @@ module.exports = {
   getTenant,
   getPid,
   getProblemDetails,
+<<<<<<< HEAD
   addProblemComment,
   getJiraTicketLink,
 }
+=======
+  getProblemDetailsWithComments,
+};
+
+>>>>>>> master

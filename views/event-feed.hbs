@@ -1,39 +1,38 @@
 {{!< webpanel}}
-{{!--
-<ul class="event-list">
-    {{#each events}}
-        <li>
-            {{this.eventName}} on {{this.entityName}}<br>
-            {{this.renderedTime}}
-            <span class="aui-lozenge aui-lozenge-{{#if this.closed}}success{{else}}error{{/if}}">{{this.status}}</span>
-        </li>
-    {{/each}}
-</ul>
---}}
-
 <table class="aui aui-table-sortable event-list">
     <thead>
         <tr>
             <th>Event</th>
-            <th>Time</th>
-            <th>Status</th>
+            <th>Opened</th>
+            <th>Closed</th>
         </tr>
     </thead>
     <tbody>
         {{#each events}}
-            <tr>
-                <td>
-                    <a href="{{this.link}}">
-                        {{this.eventName}}
-                        {{#if this.isRootCause}}
-                            <span class="aui-lozenge aui-lozenge-current">Root Cause</span>
-                        {{/if}}<br>
-                        {{this.entityName}}
-                    </a>
-                </td>
-                <td>{{this.renderedTime}}</td>
-                <td><span class="aui-lozenge aui-lozenge-{{#if this.closed}}success{{else}}error{{/if}}">{{this.status}}</span></td>
-            </tr>
+            {{#if this.isComment}}
+                <tr>
+                    <td colspan="3">{{this.renderedTime}} {{this.userName}}:<br>
+                    {{{this.content}}}</td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td>
+                        <a href="{{this.link}}">
+                            {{this.eventName}}
+                            {{#if this.isRootCause}}
+                                <span class="aui-lozenge aui-lozenge-current">Root Cause</span>
+                            {{/if}}<br>
+                            {{this.entityName}}
+                        </a>
+                    </td>
+                    <td>{{this.renderedTime}}</td>
+                    {{#if this.closed}}
+                        <td>{{this.renderedEndTime}}</td>
+                    {{else}}
+                        <td><span class="aui-lozenge aui-lozenge-error">OPEN</span></td>
+                    {{/if}}
+                </tr>
+            {{/if}}
         {{/each}}
     </tbody>
 </table>
