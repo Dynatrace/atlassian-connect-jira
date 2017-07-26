@@ -1,6 +1,6 @@
 {
-    "key": "dynatrace-andi-jira-2way",
-    "name": "Dynatrace (Andi)",
+    "key": "dynatrace-jira-2way",
+    "name": "Dynatrace",
     "description": "Display information from Dynatrace in JIRA tickets",
     "vendor": {
         "name": "Dynatrace",
