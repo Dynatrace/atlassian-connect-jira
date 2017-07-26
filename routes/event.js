@@ -38,6 +38,9 @@ module.exports = function (app, addon) {
             impact.closed = impact.status === "CLOSED";
             impact.eventName = language.eventType[impact.eventType];
             impact.renderedTime = moment.tz(impact.startTime, req.query.tz).calendar();
+            if (impact.closed) {
+              impact.renderedEndTime = moment.tz(impact.endTime, req.query.tz).calendar();
+            }
             impact.link = util.eventLink(tenantUrl, impact, pid);
             return impact;
           });

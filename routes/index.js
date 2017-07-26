@@ -21,7 +21,6 @@ module.exports = function (app, addon) {
         });
     });
 
-
     // load any additional files you have in routes and apply those to the app
     {
         var fs = require('fs');
