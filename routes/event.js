@@ -22,11 +22,12 @@ module.exports = function (app, addon) {
           if (err) {
             console.error(err);
             res.render("error");
+            return;
           }
 
           if (!problem) {
-            console.error(dres);
             res.render("error", { message: "There was an error communicating with Dynatrace" });
+            return;
           }
 
           const processedEvents = problem.rankedEvents.map(impact => {
