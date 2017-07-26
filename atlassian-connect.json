@@ -17,7 +17,7 @@
     "lifecycle": {
         "installed": "/installed"
     },
-    "scopes": [ "READ" ],
+    "scopes": [ "READ", "WRITE" ],
     "modules": {
         "configurePage": {
           "url": "/config",

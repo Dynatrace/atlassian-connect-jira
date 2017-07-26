@@ -2,6 +2,24 @@
 
 const request = require("request");
 const key = require("./atlassian-connect").key;
+const url = require("url");
+
+// Returns the full link to the JIRA Ticket that is referenced in the request object
+function getJiraTicketLink(req, ticketId) {
+  var issueId = req.query.issue;
+  var baseJiraURL = null;
+  if(req.headers["xdm_e"]) {
+    baseJiraURL = req.headers["xdm_e"];
+  } else {
+    // lets see if we have a comment.self
+    if(req.body.comment && req.body.comment.self) {
+      baseJiraURL = req.body.comment.self;
+    }
+  }
+  if(baseJiraURL == null) baseJiraURL = "http://yourjiraserver.com/browse/";
+  var parsedUrl = url.parse(baseJiraURL);
+  return `${parsedUrl.protocol}//${parsedUrl.host}/browse/${ticketId}`;
+}
 
 function getTenant(req, httpClient, cb) {
   httpClient.get({
@@ -39,13 +57,23 @@ function getProblemDetails(tenant, token, pid, cb) {
   }, cb);
 }
 
-function addProblemComment(tenant, token, pid, comment, user, context, cb) {
+function addProblemComment(tenant, token, pid, comment, user, context, jiraTicketLink, cb) {
+  // Lets build the comment string to first contain a link back to the JIRA Ticket
+  comment = `Comment sync on [JIRA - ${context}](${jiraTicketLink})\n----------------------------------------\n${comment}`;
+  var dtComment = {
+    comment,
+    user,
+    context
+  }
+  var postUrl = `${tenant}/api/v1/problem/details/${pid}/comments`
+  console.log("Dynatrace POST Url: " + postUrl) 
   request.post({
-    uri: `${tenant}/api/v1/problem/details/${pid}/comments`,
+    uri: postUrl,
     headers: {
       Authorization: `Api-Token ${token}`,
     },
-    json: `{"comment": "${comment}", "user" : "${user}", "context" : "${context}"}`,
+    body: dtComment,
+    json: true,
   }, cb);  
 }
 
@@ -81,4 +109,5 @@ module.exports = {
   getPid,
   getProblemDetails,
   addProblemComment,
+  getJiraTicketLink,
 }
