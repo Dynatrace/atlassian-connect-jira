@@ -170,12 +170,7 @@ module.exports = {
   getTenant,
   getPid,
   getProblemDetails,
-<<<<<<< HEAD
   addProblemComment,
   getJiraTicketLink,
-}
-=======
   getProblemDetailsWithComments,
 };
-
->>>>>>> master
