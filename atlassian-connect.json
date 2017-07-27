@@ -39,6 +39,14 @@
           {
             "event": "comment_created",
             "url": "/comment-created?issue={issue.key}"
+          },
+          {
+            "event": "jira:issue_created",
+            "url": "/issue-created?issue={issue.key}"
+          },
+          {
+            "event": "jira:issue_updated",
+            "url": "/issue-updated?issue={issue.key}"
           }
         ],
         "webPanels": [
@@ -70,6 +78,27 @@
             },
             "url": "/issue-right?project={project.id}&issue={issue.key}"
           }
+        ],
+        "jiraEntityProperties": [
+          {
+            "keyConfigurations": [
+              {
+                "extractions": [
+                  {
+                    "objectName": "pid",
+                    "type": "text",
+                    "alias": "dynatraceProblemId"
+                  }
+                ],
+                "propertyKey": "dynatraceProblemId"
+              }
+            ],
+            "entityType": "issue",
+            "name": {
+              "value": "Dynatrace Problem Id"
+            },
+            "key": "dynatraceProblemId"
+          }
         ]
-    }
+    }      
 }
