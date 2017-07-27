@@ -35,18 +35,48 @@ function getTenant(req, httpClient, cb) {
 }
 
 function getPid(req, httpClient, cb) {
+  if(!req.dynatraceProblem)
+    req.dynatraceProblem = {};
   if (req.query.issue) {
     httpClient.get({
       uri: `/rest/api/2/issue/${req.query.issue}/properties/dynatraceProblemId`,
       json: true,
     }, (err, ires, body) => {
       if (err) { return cb(err); }
-      req.pid = body.value;
+
+      // BACKWARD COMP CHECK. In the first version of Dynatrace -> JIRA Integration we only had the string value as PID. Now we need to wrap it into a JSON Object
+      if(!body.value) {
+        // no property set!
+      } else
+      if(typeof body.value === 'string') {
+        req.pid = body.value;
+        req.dynatraceProblem = { pid : req.pid}
+        setDynatraceProblem(httpClient, req, req.dynatraceProblem, null);
+      } else {
+        req.dynatraceProblem = body.value;
+        // always provide req.pid with the problem id
+        req.pid = req.dynatraceProblem.pid;
+      }
+
       cb(null, req.pid);
     });
   } else {
     cb();
   }
+}
+
+function setDynatraceProblem(httpClient, req, dynatraceProblem, cb) {
+  httpClient.put({
+    uri: `/rest/api/2/issue/${req.query.issue}/properties/dynatraceProblemId`,
+    body: dynatraceProblem,
+    json: true
+  }, (err, ires, body) => {
+    // req.pidRequiresUpdate means we are up to date
+    req.pidRequiresUpdate = false;
+    console.log("Response from setting dynatraceProblemId property to parsed Problem Id: " + dynatraceProblem.pid);
+    console.log(body);
+    if(cb) cb(err, ires,body);
+  });  
 }
 
 function getProblemDetails(tenant, token, pid, cb) {
@@ -170,4 +200,5 @@ module.exports = {
   addProblemComment,
   getJiraTicketLink,
   getProblemDetailsWithComments,
+  setDynatraceProblem,
 };
