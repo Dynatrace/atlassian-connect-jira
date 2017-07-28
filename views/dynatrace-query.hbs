@@ -1,0 +1,27 @@
+{{!< webpanel}}
+
+<form action="/dynatrace-query" class="aui"> 
+    <div class="field-group">
+        <label for="query">Dynatrace QL</label>
+        <input type="hidden" name="jwt" value="{{token}}">
+        <input class="text long-field" placeholder="{{placeholderQuery}}" type="text" value="{{query}}" id="query" />   
+        <button class="aui-button aui-button-primary" id="execute-query" type="submit">Query</button>
+    </div>
+</form>
+
+<table class="aui aui-table-sortable event-list">
+    <thead>
+        <tr>
+            <th>Measure Name</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each result}}
+            <tr>
+                <td>{{this.measureName}}</td>
+                <td>{{this.value}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

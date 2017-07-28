@@ -33,7 +33,14 @@
               "value": "Dynatrace Events"
             },
             "key": "event-list"
-          }
+          },
+          {
+            "url": "/dynatrace-query?issue={issue.key}",
+            "name": {
+              "value": "Dynatrace Analytics"
+            },
+            "key": "dynatrace-query"
+          }          
         ],
         "webhooks": [
           {
@@ -86,8 +93,38 @@
                 "extractions": [
                   {
                     "objectName": "pid",
-                    "type": "text",
+                    "type": "string",
                     "alias": "dynatraceProblemId"
+                  },
+                  {
+                    "objectName" : "problem",
+                    "type" : "string",
+                    "alias" : "dynatraceProblem"
+                  },
+                  {
+                    "objectName" : "tags",
+                    "type" : "text",
+                    "alias" : "dynatraceTags"
+                  },
+                  {
+                    "objectName" : "impact",
+                    "type" : "string",
+                    "alias" : "dynatraceImpact"
+                  },
+                  {
+                    "objectName" : "severity",
+                    "type" : "string",
+                    "alias" : "dynatraceSeverity"
+                  },
+                  {
+                    "objectName" : "hasRootCause",
+                    "type" : "string",
+                    "alias" : "dynatraceHasRootCause"
+                  },
+                  {
+                    "objectName" : "status",
+                    "type" : "string",
+                    "alias" : "dynatraceStatus"
                   }
                 ],
                 "propertyKey": "dynatraceProblemId"
