@@ -28,6 +28,11 @@ In your JIRA instance navigate to "Managed Add-Ons". As we haven't published the
 3. Once the Add-On is installed click on "Configure"
 4. Enter your Dynatrace Tenant URL as well as a Dynatrace API token.
 
+*Self-Hosting of Dynatrace Add-On?*
+If you run JIRA or Dynatrace On-Premises and cannot connect to our hosted instance feel free to host the plugin yourself. Here are the steps:
+npm install
+node app.js
+
 # Key Use Cases explained!
 For more details on each use case we recommend to read our [Atlassian Connect Week Austin 2017 blog]() where we explained the technical implementation of the following use cases:
 
