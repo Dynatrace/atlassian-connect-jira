@@ -40,7 +40,7 @@ If the JIRA ticket is linked with a Dynatrace Problem the Add-On will query LIVE
 
 ## Live Problem Events Feed
 The Dynatrace Events tab automatically pulls in all comments and correlated problem events from the linked Dynatrace Problem. The list highlights special events and provides direct links to Dynatrace root cause dashboards
-![](/.images/DynatraceJIRAEventsTab.png)
+![](./images/DynatraceJIRAEventsTab.png)
 
 ## JQL Support
 The linked Dynatrace problem data including Tags, Impact, Severity, Status, ... is indexed by JIRA. This allows JIRA users to query JIRA tickets that are linked to Dynatrace Problems. This is especially useful to search for related problems.
