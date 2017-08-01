@@ -16,7 +16,7 @@
 
 <div class="tags">
     {{#each problem.topTags}}
-        <span class="aui-label">{{this.key}}</span>
+        <a target="_parent" class="aui-label" href="{{this.link}}">{{this.key}}</a>
     {{/each}}
     {{#if problem.manyTags}}
     ...

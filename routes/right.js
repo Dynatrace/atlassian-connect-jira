@@ -43,7 +43,10 @@ module.exports = function (app, addon) {
           problem.impactLevelName = language.impactLevel[problem.impactLevel] || problem.impactLevel;
           problem.numEntitiesAffected = _.uniq(problem.rankedEvents.map(e => e.entityId)).length;
 
-          problem.tagsOfAffectedEntities = problem.tagsOfAffectedEntities || [];
+          problem.tagsOfAffectedEntities = (problem.tagsOfAffectedEntities || []).map(t => {
+            t.link = `${req.query["xdm_e"]}/browse/${req.query.issue}?jql=dynatraceTags%20~%20%22${t.key}%22`;
+            return t;
+          });
           problem.manyTags = [problem.tagsOfAffectedEntities.length] > 10;
           problem.topTags = problem.tagsOfAffectedEntities.slice(0, 10);
           res.render("issue", { problem, tenant: tenant.tenant });
