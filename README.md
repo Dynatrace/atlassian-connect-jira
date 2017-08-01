@@ -36,24 +36,22 @@ The "dynatraceProblemId" entity property is set in different scenarios
 
 ## Live Problem Status Overview
 If the JIRA ticket is linked with a Dynatrace Problem the Add-On will query LIVE data through the Dynatrace Problem REST API and display the information in a panel.
-![./images/JIRAWebPanel.png]()
+![](./images/JIRAWebPanel.png)
 
 ## Live Problem Events Feed
 The Dynatrace Events tab automatically pulls in all comments and correlated problem events from the linked Dynatrace Problem. The list highlights special events and provides direct links to Dynatrace root cause dashboards
-![/.images/DynatraceJIRAEventsTab.png]()
+![](/.images/DynatraceJIRAEventsTab.png)
 
 ## JQL Support
 The linked Dynatrace problem data including Tags, Impact, Severity, Status, ... is indexed by JIRA. This allows JIRA users to query JIRA tickets that are linked to Dynatrace Problems. This is especially useful to search for related problems.
-![./images/SearchDynatraceInJIRA.png]()
+![](./images/SearchDynatraceInJIRA.png)
 
 ## Synchronize Comments
 If you add a comment to a JIRA ticket we do not only scan for a link to a Dynatrace Problem to link the ticket with that problem. In case the JIRA ticket is already linked we push the comment to the Dynatrace side so that the comment can be seen in both JIRA and Dynatrace.
-![./images/DynatraceJIRAWebHook_CommentSync.png]()
+![](./images/DynatraceJIRAWebHook_CommentSync.png)
 
 ## Query Dynatrace metrics
 As a JIRA user you can execute a query against Dynatrace to pull LIVE metrics for certain entites, e.g: Number of Active Users on the website or Response Time of a service. This allows you to close the Feedback Loop from Operations & Testing back into your development team.
 
-
 ## What's next?
-
-[Read the docs](https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-install-dependencies).
+Give us feedback on further extensions to the Add-On. Which use cases are missing? Would you also like to see tighther integrations with other Atlassian tools?
