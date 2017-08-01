@@ -13,6 +13,7 @@ While implementating the majority of this integration at Atlassian Connect Week 
 
 Want to see the Add-On in action? [Watch this video]()
 Want to learn more about our learnings when we implemented this Add-On? [Read our Atlassian Connect blog]()
+Want to see the HipChat Add-On we built? [Dynatrace HipChat Add-On on GitHub](https://github.com/Dynatrace/atlassian-connect-hipchat)
 
 ## Getting started with this Add-On
 In order to use this integration you need
