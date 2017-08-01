@@ -1,8 +1,8 @@
 {
     // This is the default environment. To change your app to use
-    // a different env, set NODE_ENV (http://expressjs.com/api.html#app.configure)
+    // a different env, set NODE_ENV (https://expressjs.com/api.html#app.configure)
     "development": {
-        "localBaseUrl": "http://fccf5896.ngrok.io",
+        "localBaseUrl": "https://atlassian-connect.dynatracelabs.com",
         // This is the port your Express server will listen on
         "port": 3000,
         //Use 'unauthorized.hbs' template for displaying an error page
@@ -57,7 +57,7 @@
         //Use 'unauthorized.hbs' template for displaying an error page
         "errorTemplate": true,
         // This is the public URL to your production add-on.
-        "localBaseUrl": "http://fccf5896.ngrok.io",
+        "localBaseUrl": "https://atlassian-connect.dynatracelabs.com",
         "store": {
             // You won't want to use the memory store in production, or your install
             // registrations will be forgotten any time your app restarts.  Here

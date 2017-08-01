@@ -6,10 +6,10 @@
         "name": "Dynatrace",
         "url": "https://dynatrace.com"
     },
-    "baseUrl": "https://fccf5896.ngrok.io",
+    "baseUrl": "https://atlassian-connect.dynatracelabs.com",
     "links": {
-        "self": "https://fccf5896.ngrok.io/atlassian-connect.json",
-        "homepage": "https://fccf5896.ngrok.io/atlassian-connect.json"
+        "self": "https://atlassian-connect.dynatracelabs.com/atlassian-connect.json",
+        "homepage": "https://atlassian-connect.dynatracelabs.com/atlassian-connect.json"
     },
     "authentication": {
         "type": "jwt"
