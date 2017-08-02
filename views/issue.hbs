@@ -10,9 +10,9 @@
     <h6>{{problem.rankedEvents.length}} events on {{problem.numEntitiesAffected}} components</h6>
 </div>
 <strong>Severity</strong>
-<a target="_parent" href="{{baseUrl}}/browse/{{key}}?jql=dynatraceSeverity%20%3D%20%22{{problem.severityLevel}}%22">{{problem.severityLevelName}}</a><br>
+<a target="_parent" href="{{hostBaseUrl}}/browse/{{issue}}?jql=dynatraceSeverity%20%3D%20%22{{problem.severityLevel}}%22">{{problem.severityLevelName}}</a><br>
 <strong>Impact</strong>
-{{problem.impactLevelName}}<br>
+<a target="_parent" href="{{hostBaseUrl}}/browse/{{issue}}?jql=dynatraceImpact%20%3D%20%22{{problem.impactLevel}}%22">{{problem.impactLevelName}}</a><br>
 
 <div class="tags">
     {{#each problem.topTags}}
