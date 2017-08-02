@@ -1,3 +1,7 @@
+.ac-content {
+    max-height: 500px;
+}
+
 body {
     background-color: white;
 }
