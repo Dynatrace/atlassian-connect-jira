@@ -10,7 +10,7 @@
     <h6>{{problem.rankedEvents.length}} events on {{problem.numEntitiesAffected}} components</h6>
 </div>
 <strong>Severity</strong>
-{{problem.severityLevelName}}<br>
+<a target="_parent" href="{{baseUrl}}/browse/{{key}}?jql=dynatraceSeverity%20%3D%20%22{{problem.severityLevel}}%22">{{problem.severityLevelName}}</a><br>
 <strong>Impact</strong>
 {{problem.impactLevelName}}<br>
 
