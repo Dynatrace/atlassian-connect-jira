@@ -11,8 +11,8 @@ The Dynatrace JIRA Cloud Connect Add-On enables several Use-Cases for [JIRA Clou
 While implementating the majority of this integration at Atlassian Connect Week in Austin, Texas we also paired up with xMatters and build a tighther integration between [xMatters](https://github.com/xmatters/xm-labs-dynatrace), [Dynatrace](http://www.dynatrace.com) and JIRA:
 ![](./images/Dynatrace_xMatters_JIRA_Workflow.png)
 
-Want to see the Add-On in action? [Watch this video]()
-Want to learn more about our learnings when we implemented this Add-On? [Read our Atlassian Connect blog]()
+Want to see the Add-On in action? [Watch this video](https://www.youtube.com/watch?v=px4ec9C32I4)
+Want to learn more about our learnings when we implemented this Add-On? [Read our Atlassian Connect blog](http://blog.dynatrace.com)
 Want to see the HipChat Add-On we built? [Dynatrace HipChat Add-On on GitHub](https://github.com/Dynatrace/atlassian-connect-hipchat)
 
 ## Getting started with this Add-On
