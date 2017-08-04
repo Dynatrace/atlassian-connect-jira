@@ -49,7 +49,7 @@ module.exports = function (app, addon) {
           });
           problem.manyTags = [problem.tagsOfAffectedEntities.length] > 10;
           problem.topTags = problem.tagsOfAffectedEntities.slice(0, 10);
-          res.render("issue", { problem, tenant: tenant.tenant });
+          res.render("issue", { problem, tenant: tenant.tenant, issue: req.query.issue });
         });
       });
     });

@@ -12,7 +12,7 @@ While implementating the majority of this integration at Atlassian Connect Week 
 ![](./images/Dynatrace_xMatters_JIRA_Workflow.png)
 
 Want to see the Add-On in action? [Watch this video](https://www.youtube.com/watch?v=px4ec9C32I4)
-Want to learn more about our learnings when we implemented this Add-On? [Read our Atlassian Connect blog](http://blog.dynatrace.com)
+Want to learn more about our learnings when we implemented this Add-On? [Read our Atlassian Connect blog](https://www.dynatrace.com/blog/atlassian-connect-ing-devops-tools-jira-xmatters-dynatrace/)
 Want to see the HipChat Add-On we built? [Dynatrace HipChat Add-On on GitHub](https://github.com/Dynatrace/atlassian-connect-hipchat)
 
 ## Getting started with this Add-On
