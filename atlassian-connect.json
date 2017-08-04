@@ -29,6 +29,26 @@
         "jiraIssueTabPanels": [
           {
             "url": "/event-feed?issue={issue.key}",
+            "conditions": [
+              {
+                "and": [
+                  {
+                    "condition": "entity_property_exists",
+                    "params": {
+                      "entity": "addon",
+                      "propertyKey": "tenant"
+                    }
+                  },
+                  {
+                    "condition": "entity_property_exists",
+                    "params": {
+                      "entity": "issue",
+                      "propertyKey": "dynatraceProblemId"
+                    }
+                  }
+                ]
+              }
+            ],
             "name": {
               "value": "Dynatrace Events"
             },
