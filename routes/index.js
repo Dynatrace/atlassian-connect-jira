@@ -3,7 +3,7 @@ const language = require("./../resources/language");
 const async = require("async");
 const _ = require("lodash");
 
-module.exports = function (app, addon) {
+module.exports = function (app, addon, logger) {
 
     // Root route. This route will serve the `atlassian-connect.json` unless the
     // documentation url inside `atlassian-connect.json` is set
@@ -35,7 +35,7 @@ module.exports = function (app, addon) {
             var routes = require("./" + path.basename(file));
 
             if (typeof routes === "function") {
-                routes(app, addon);
+                routes(app, addon, logger);
             }
         }
     }

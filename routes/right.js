@@ -4,7 +4,7 @@ const async = require("async");
 const _ = require("lodash");
 const util = require("../util");
 
-module.exports = function (app, addon) {
+module.exports = function (app, addon, logger) {
     app.get("/issue-right", addon.authenticate(), function(req, res) {
       const httpClient = addon.httpClient(req);
 

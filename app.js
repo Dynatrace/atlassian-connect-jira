@@ -9,6 +9,12 @@ var compression = require('compression');
 var cookieParser = require('cookie-parser');
 var errorHandler = require('errorhandler');
 var morgan = require('morgan');
+var bunyan = require("bunyan");
+var bunyanExpress = require("bunyan-express");
+var logger = bunyan.createLogger({
+  name: "Dynatrace Connect",
+  level: 20,
+});
 // You need to load `atlassian-connect-express` to use her godly powers
 var ac = require('atlassian-connect-express');
 // Static expiry middleware to help serve static resources efficiently
@@ -47,7 +53,8 @@ app.set('views', viewsDir);
 
 // Declare any Express [middleware](http://expressjs.com/api.html#middleware) you'd like to use here
 // Log requests, using an appropriate formatter by env
-app.use(morgan(devEnv ? 'dev' : 'combined'));
+// app.use(morgan(devEnv ? 'dev' : 'combined'));
+app.use(bunyanExpress(logger));
 // Include request parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -68,7 +75,7 @@ app.use(express.static(staticDir));
 if (devEnv) app.use(errorHandler());
 
 // Wire up your routes using the express and `atlassian-connect-express` objects
-routes(app, addon);
+routes(app, addon, logger);
 
 // Boot the damn thing
 http.createServer(app).listen(port, function(){

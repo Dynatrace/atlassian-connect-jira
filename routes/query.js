@@ -5,7 +5,7 @@ const _ = require("lodash");
 const util = require("../util");
 const moment = require("moment-timezone");
 
-module.exports = function (app, addon) {
+module.exports = function (app, addon, logger) {
     app.get("/dynatrace-query", addon.authenticate(), (req, res) => {
       const httpClient = addon.httpClient(req);
 

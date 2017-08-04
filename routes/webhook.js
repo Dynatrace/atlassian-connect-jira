@@ -53,7 +53,7 @@ function linkWithDynatraceProblem(httpClient, req, tenantUrl, tenantToken, dynat
 }
 
 
-module.exports = function (app, addon) {
+module.exports = function (app, addon, logger) {
   app.post("/issue-created", addon.authenticate(), (req, res) => {
     var body = req.body;
     var httpClient = addon.httpClient(req);

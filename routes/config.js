@@ -4,7 +4,7 @@ const language = require("./../resources/language");
 const async = require("async");
 const _ = require("lodash");
 
-module.exports = function (app, addon) {
+module.exports = function (app, addon, logger) {
     app.get("/config", addon.authenticate(), function(req, res) {
       var httpClient = addon.httpClient(req);
       httpClient.get({
@@ -34,6 +34,10 @@ module.exports = function (app, addon) {
           token: req.query["tenant-token"],
         }),
       }, (err, ires, body) => {
+        logger.debug({
+          event: "config_tenant",
+          tenant: req.query["tenant-url"],
+        });
         res.render('config', {
           title: "Dynatrace JIRA (Saved)",
           tenant: req.query["tenant-url"],
